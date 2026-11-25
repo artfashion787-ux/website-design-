@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> S & R & S Café</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap');
+
+:root {
+  --coffee: #4b2e24;
+  --dark: #2d1b15;
+  --cream: #fbf6ef;
+  --sage: #87977b;
+  --gold: #d8aa6b;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: #302720;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.cafe-nav {
+  background: var(--dark);
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: white !important;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--gold) !important;
+}
+
+.hero {
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(35,22,17,.85), rgba(35,22,17,.3)),
+    url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=85')
+    center/cover;
+}
+
+.hero h1 {
+  color: white;
+}
+
+.hero span {
+  color: var(--gold);
+}
+
+.eyebrow {
+  color: var(--sage);
+  letter-spacing: 3px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.section-pad {
+  padding: 70px 0;
+}
+
+.section-intro {
+  max-width: 650px;
+  margin: 15px auto;
+  color: #756a62;
+}
+
+.btn-cafe {
+  background: var(--coffee);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-weight: bold;
+}
+
+.btn-cafe:hover {
+  background: var(--dark);
+  color: white;
+}
+
+.feature-card,
+.menu-card,
+.booking-card {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 25px;
+  height: 100%;
+}
+
+.feature-icon {
+  font-size: 40px;
+}
+
+.highlight {
+  background: var(--coffee);
+  color: white;
+  padding: 60px 0;
+}
+
+.highlight h2 {
+  color: white;
+}
+
+.menu-card {
+  border: 1px solid #eee1d4;
+}
+
+.menu-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.menu-top span {
+  color: var(--sage);
+  font-weight: bold;
+}
+
+.menu-card p {
+  color: #756a62;
+}
+
+.menu-tag {
+  display: inline-block;
+  background: #e9e2d6;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.gallery-card {
+  background: var(--cream);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.gallery-card h3 {
+  padding: 18px;
+}
+
+.about-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.form-wrap {
+  max-width: 850px;
+  margin: auto;
+  background: var(--cream);
+  padding: 35px;
+  border-radius: 12px;
+}
+
+.form-control,
+.form-select {
+  padding: 12px;
+}
+
+.form-label {
+  font-weight: bold;
+  color: var(--coffee);
+}
+
+.site-footer {
+  background: var(--dark);
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+@media(max-width:767px) {
+  .hero {
+    min-height: 450px;
+  }
+
+  .section-pad {
+    padding: 45px 15px;
+  }
+
+  .form-wrap {
+    padding: 20px;
+  }
+
+  .about-image {
+    height: 280px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg navbar-dark cafe-nav">
+<div class="container">
+
+<a class="navbar-brand" href="#" onclick="showPage('home')">
+☕ S & R & S
+</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('home')">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('menu')">Menu</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('gallery')">Gallery</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('about')">About</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('booking')">Book a Table</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" onclick="showPage('bookings')">My Bookings</a>
+</li>
+
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+<header class="hero">
+<div class="container">
+
+<p class="eyebrow">YOUR LITTLE CORNER OF COMFORT</p>
+
+<h1>
+Good coffee.<br>
+<span>Beautiful moments.</span>
+</h1>
+
+<p class="lead">
+Freshly brewed coffee, handmade treats,
+and a cozy place to pause.
+</p>
+
+<button class="btn btn-cafe btn-lg"
+onclick="showPage('menu')">
+Explore Our Menu
+</button>
+
+</div>
+</header>
+
+<section class="container section-pad text-center">
+
+<p class="eyebrow">WELCOME TO S & R & S</p>
+
+<h2>A Café Made for Your Everyday Moments</h2>
+
+<p class="section-intro">
+Meet a friend, take a study break,
+or enjoy your favorite cup.
+</p>
+
+<div class="row g-4 mt-4">
+
+<div class="col-md-4">
+<div class="feature-card">
+<div class="feature-icon">☕</div>
+<h3>Fresh Coffee</h3>
+<p>Carefully prepared coffee and comforting classics.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-card">
+<div class="feature-icon">🥐</div>
+<h3>Daily Treats</h3>
+<p>Sweet and savory bites baked fresh every day.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-card">
+<div class="feature-icon">🌿</div>
+<h3>Cozy Atmosphere</h3>
+<p>A welcoming place for conversations and calm.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="highlight text-center">
+<div class="container">
+<h2>Make Your Next Coffee Date Happen</h2>
+<p>Book your table with us today.</p>
+<button class="btn btn-light btn-lg"
+onclick="showPage('booking')">
+Book a Table
+</button>
+</div>
+</section>
+
+</div>
+
+<!-- MENU PAGE -->
+<div id="menu" class="page">
+
+<section class="container section-pad">
+
+<div class="text-center mb-5">
+<p class="eyebrow">SOMETHING DELICIOUS</p>
+<h1>Our Menu</h1>
+<p class="section-intro">
+Discover your new favorite drink or treat.
+</p>
+</div>
+
+<div class="row justify-content-center mb-4">
+<div class="col-md-6">
+<input type="search" id="menuSearch"
+class="form-control form-control-lg"
+placeholder="Search menu...">
+</div>
+</div>
+
+<div class="row g-4" id="menuItems">
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="espresso coffee">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Classic Espresso</h3>
+<span>AED 14</span>
+</div>
+<p>A rich, bold shot with a smooth finish.</p>
+<span class="menu-tag">Coffee</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="vanilla latte coffee">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Vanilla Latte</h3>
+<span>AED 22</span>
+</div>
+<p>Espresso, steamed milk, and vanilla.</p>
+<span class="menu-tag">Coffee</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="iced caramel cold coffee">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Iced Caramel Coffee</h3>
+<span>AED 24</span>
+</div>
+<p>Chilled coffee with caramel and milk.</p>
+<span class="menu-tag">Cold Drinks</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="matcha green tea">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Matcha Latte</h3>
+<span>AED 23</span>
+</div>
+<p>Green tea blended with creamy milk.</p>
+<span class="menu-tag">Tea</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="croissant bakery">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Butter Croissant</h3>
+<span>AED 16</span>
+</div>
+<p>Flaky, golden layers baked fresh.</p>
+<span class="menu-tag">Bakery</span>
+</div>
+</div>
+
+<div class="col-md-6 col-lg-4 menu-item" data-search="chocolate cake dessert">
+<div class="menu-card">
+<div class="menu-top">
+<h3>Chocolate Cake</h3>
+<span>AED 20</span>
+</div>
+<p>Soft chocolate cake for a sweet break.</p>
+<span class="menu-tag">Dessert</span>
+</div>
+</div>
+
+</div>
+
+<p id="noResults" class="text-center mt-4 d-none">
+No menu items match your search.
+</p>
+
+</section>
+</div>
+
+<!-- GALLERY PAGE -->
+<div id="gallery" class="page">
+
+<section class="container section-pad">
+
+<div class="text-center mb-5">
+<p class="eyebrow">A LITTLE LOOK INSIDE</p>
+<h1>Our Gallery</h1>
+<p class="section-intro">
+Take a look at our coffee and café atmosphere.
+</p>
+</div>
+
+<div class="row g-4">
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Coffee">
+<h3>Coffee Moments</h3>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80" alt="Bakery">
+<h3>Fresh from the Oven</h3>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=900&q=80" alt="Café">
+<h3>Our Cozy Corner</h3>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80" alt="Coffee cup">
+<h3>Slow Mornings</h3>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" alt="Cake">
+<h3>Sweet Treats</h3>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" alt="Coffee shop">
+<h3>Meet and Unwind</h3>
+</div>
+</div>
+
+</div>
+</section>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="about" class="page">
+
+<section class="container section-pad">
+<div class="row align-items-center g-5">
+
+<div class="col-lg-6">
+<p class="eyebrow">OUR STORY</p>
+
+<h1>A Warm Cup and a Warm Welcome</h1>
+
+<p class="mt-4">
+S & R & S is a café concept built around simple
+pleasures: thoughtful coffee, fresh treats, and a
+comfortable place to connect.
+</p>
+
+<p>
+We believe a café can be more than a stop for coffee.
+It can be a place to catch up with friends, finish a
+project, or enjoy a quiet moment.
+</p>
+
+<button class="btn btn-cafe"
+onclick="showPage('booking')">
+Visit Us
+</button>
+</div>
+
+<div class="col-lg-6">
+<img class="about-image"
+src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1000&q=80"
+alt="Café interior">
+</div>
+
+</div>
+</section>
+
+<section class="highlight text-center">
+<div class="container">
+<h2>We'd Love to Welcome You</h2>
+<p>Address: Business Bay, Dubai.</p>
+<p><strong>Opening Hours:</strong> Daily, 8 AM – 10 PM</p>
+</div>
+</section>
+
+</div>
+
+<!-- BOOKING FORM PAGE -->
+<div id="booking" class="page">
+
+<section class="container section-pad">
+
+<div class="text-center mb-4">
+<p class="eyebrow">YOUR TABLE IS WAITING</p>
+<h1>Book a Table</h1>
+<p class="section-intro">
+Fill in your details to save a booking request.
+</p>
+</div>
+
+<div class="form-wrap">
+
+<div id="formMessage" class="alert d-none"></div>
+
+<form id="bookingForm" novalidate>
+
+<div class="row g-3">
+
+<div class="col-md-6">
+<label class="form-label">Full Name *</label>
+<input id="fullName" class="form-control" required
+pattern="[A-Za-z][A-Za-z .'-]{1,49}">
+<div class="invalid-feedback">Enter a valid name.</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Email *</label>
+<input id="email" type="email" class="form-control" required
+pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}">
+<div class="invalid-feedback">Enter a valid email.</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Phone Number *</label>
+<input id="phone" class="form-control" required
+pattern="[0-9+() -]{7,20}">
+<div class="invalid-feedback">Enter a valid phone number.</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Number of Guests *</label>
+<select id="guests" class="form-select" required>
+<option value="">Choose guests</option>
+<option>1</option><option>2</option>
+<option>3</option><option>4</option>
+<option>5</option><option>6</option>
+<option>7</option><option>8</option>
+</select>
+<div class="invalid-feedback">Choose guests.</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Booking Date *</label>
+<input type="date" id="date" class="form-control" required>
+<div class="invalid-feedback">Choose a date.</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Booking Time *</label>
+<select id="time" class="form-select" required>
+<option value="">Choose time</option>
+<option>09:00 AM</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>01:00 PM</option>
+<option>02:00 PM</option>
+<option>03:00 PM</option>
+<option>04:00 PM</option>
+<option>05:00 PM</option>
+<option>06:00 PM</option>
+<option>07:00 PM</option>
+<option>08:00 PM</option>
+<option>09:00 PM</option>
+</select>
+<div class="invalid-feedback">Choose a time.</div>
+</div>
+
+<div class="col-12">
+<label class="form-label">Special Request</label>
+<textarea id="notes" class="form-control" rows="3"></textarea>
+</div>
+
+<div class="col-12">
+<button class="btn btn-cafe btn-lg w-100" type="submit">
+Save Booking
+</button>
+
+<p class="small text-muted mt-3">
+</p>
+</div>
+
+</div>
+</form>
+</div>
+</section>
+</div>
+
+<!-- MY BOOKINGS PAGE -->
+<div id="bookings" class="page">
+
+<section class="container section-pad">
+
+<div class="text-center mb-5">
+<p class="eyebrow">YOUR SAVED REQUESTS</p>
+<h1>My Bookings</h1>
+<p class="section-intro">
+Your saved booking requests will appear here.
+</p>
+</div>
+
+<div id="bookingList" class="row g-3"></div>
+
+<div id="emptyBookings" class="text-center p-5">
+<div class="feature-icon">☕</div>
+<h2>No Bookings Yet</h2>
+<p>Save a booking request to see it here.</p>
+<button class="btn btn-cafe" onclick="showPage('booking')">
+Make a Booking
+</button>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+© <span id="year"></span> S & R & S
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// PAGE NAVIGATION
+function showPage(pageName) {
+  document.querySelectorAll('.page').forEach(function(page) {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageName).classList.add('active');
+
+  window.scrollTo(0, 0);
+
+  // Close mobile menu after selecting a page.
+  const nav = document.getElementById('nav');
+  const menu = bootstrap.Collapse.getInstance(nav);
+
+  if (menu) {
+    menu.hide();
+  }
+
+  if (pageName === 'bookings') {
+    displayBookings();
+  }
+}
+
+// Current year
+document.getElementById('year').textContent =
+  new Date().getFullYear();
+
+
+// MENU SEARCH
+const menuSearch = document.getElementById('menuSearch');
+
+menuSearch.addEventListener('input', function() {
+  const search = menuSearch.value.toLowerCase().trim();
+  const items = document.querySelectorAll('.menu-item');
+  let count = 0;
+
+  items.forEach(function(item) {
+    const text = item.textContent.toLowerCase();
+    const keywords = item.dataset.search.toLowerCase();
+
+    const match = text.includes(search) ||
+                  keywords.includes(search);
+
+    item.classList.toggle('d-none', !match);
+
+    if (match) {
+      count++;
+    }
+  });
+
+  document.getElementById('noResults')
+    .classList.toggle('d-none', count > 0);
+});
+
+
+// BOOKING FORM
+const bookingForm = document.getElementById('bookingForm');
+const dateInput = document.getElementById('date');
+
+const now = new Date();
+const today = new Date(
+  now.getTime() - now.getTimezoneOffset() * 60000
+).toISOString().split('T')[0];
+
+dateInput.min = today;
+
+bookingForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const message = document.getElementById('formMessage');
+
+  dateInput.setCustomValidity(
+    dateInput.value < today
+      ? 'Choose today or a future date.'
+      : ''
+  );
+
+  bookingForm.classList.add('was-validated');
+
+  if (!bookingForm.checkValidity()) {
+    message.className = 'alert alert-danger';
+    message.textContent =
+      'Please correct the highlighted fields.';
+    return;
+  }
+
+  const booking = {
+    id: Date.now(),
+    name: document.getElementById('fullName').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    guests: document.getElementById('guests').value,
+    date: dateInput.value,
+    time: document.getElementById('time').value,
+    notes: document.getElementById('notes').value.trim()
+  };
+
+  const bookings = JSON.parse(
+    localStorage.getItem('beanBloomBookings') || '[]'
+  );
+
+  bookings.push(booking);
+
+  localStorage.setItem(
+    'beanBloomBookings',
+    JSON.stringify(bookings)
+  );
+
+  message.className = 'alert alert-success';
+  message.textContent =
+    'Your booking request has been saved!';
+
+  bookingForm.reset();
+  bookingForm.classList.remove('was-validated');
+  dateInput.min = today;
+});
+
+
+// DISPLAY BOOKINGS
+function displayBookings() {
+  const list = document.getElementById('bookingList');
+  const empty = document.getElementById('emptyBookings');
+
+  list.innerHTML = '';
+
+  const bookings = JSON.parse(
+    localStorage.getItem('S & R & S Bookings') || '[]'
+  );
+
+  empty.classList.toggle('d-none', bookings.length > 0);
+
+  bookings.slice().reverse().forEach(function(booking) {
+    const col = document.createElement('div');
+    col.className = 'col-md-6 col-lg-4';
+
+    const card = document.createElement('div');
+    card.className = 'booking-card';
+
+    const title = document.createElement('h3');
+    title.textContent = booking.name;
+    card.appendChild(title);
+
+    const details = [
+      ['Email', booking.email],
+      ['Phone', booking.phone],
+      ['Guests', booking.guests],
+      ['Date', booking.date],
+      ['Time', booking.time],
+      ['Request', booking.notes || 'None']
+    ];
+
+    details.forEach(function(detail) {
+      const p = document.createElement('p');
+      const strong = document.createElement('strong');
+
+      strong.textContent = detail[0] + ': ';
+      p.appendChild(strong);
+      p.appendChild(document.createTextNode(detail[1]));
+
+      card.appendChild(p);
+    });
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className =
+      'btn btn-outline-secondary mt-3';
+    deleteButton.textContent = 'Delete Booking';
+
+    deleteButton.addEventListener('click', function() {
+      const updated = bookings.filter(function(item) {
+        return item.id !== booking.id;
+      });
+
+      localStorage.setItem(
+        'beanBloomBookings',
+        JSON.stringify(updated)
+      );
+
+      displayBookings();
+    });
+
+    card.appendChild(deleteButton);
+    col.appendChild(card);
+    list.appendChild(col);
+  });
+}
+</script>
+
+</body>
+</html>
